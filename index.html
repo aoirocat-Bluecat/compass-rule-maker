@@ -26,8 +26,16 @@
     <label>ゲームモード</label>
     <select id="mode"><option selected>カスタムマッチ</option></select>
 
-    <label>試合時間（分）</label>
-    <input type="number" id="time" value="3">
+    <label>試合時間</label>
+    <select id="time">
+      <option value="60">60秒</option>
+      <option value="90">90秒</option>
+      <option value="180" selected>180秒（通常）</option>
+      <option value="240">240秒</option>
+      <option value="300">300秒</option>
+      <option value="480">480秒</option>
+      <option value="999">999秒</option>
+    </select>
 
     <label>使用禁止ヒーロー（カンマ区切り）</label>
     <input type="text" id="heroes" placeholder="例: ジャンヌ, リリカ">
@@ -132,7 +140,7 @@ function generateRule() {
     matchText += `${labels[i-1]}: ${map}\n`;
   }
 
-  const text = `【#コンパス カスタムルール】\n\nモード: ${mode}\n試合時間: ${time}分\n参加人数: ${players}\n\nチームA: ${teamA || "未設定"}\nチームB: ${teamB || "未設定"}\n\n使用禁止ヒーロー: ${heroes || "なし"}\nカード制限: ${cards || "なし"}\n追加ルール: ${rules || "なし"}\n\nステージ:\n${matchText}`;
+  const text = `【#コンパス カスタムルール】\n\nモード: ${mode}\n試合時間: ${time}\n参加人数: ${players}\n\nチームA: ${teamA || "未設定"}\nチームB: ${teamB || "未設定"}\n\n使用禁止ヒーロー: ${heroes || "なし"}\nカード制限: ${cards || "なし"}\n追加ルール: ${rules || "なし"}\n\nステージ:\n${matchText}`;
 
   document.getElementById('output').innerText = text;
 }
