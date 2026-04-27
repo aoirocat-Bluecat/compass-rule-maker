@@ -119,6 +119,21 @@ button {
 <button class="cardBtn">その他</button>
 </div>
 
+<label>使用禁止ヒーロー</label>
+<input type="text" id="heroes" placeholder="例: ジャンヌ, リリカ">
+
+<label>追加ルール</label>
+<input type="text" id="rules" placeholder="例: ダッシュ禁止">
+
+<label>参加人数</label>
+<input type="number" id="players" value="6">
+
+<label>チームA</label>
+<input type="text" id="teamA">
+
+<label>チームB</label>
+<input type="text" id="teamB">
+
 <label>試合数</label>
 <select id="matchCount">
 <option value="1">1試合</option>
@@ -139,14 +154,10 @@ button {
 <h3>生成結果</h3>
 <div id="output" class="output"></div>
 
-<!-- 🔥 Xロゴ（PNGなので確実に画像に入る） -->
 <div class="credit">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png"
-       width="16">
-  <a href="https://twitter.com/AoirocatYoutube"
-     target="_blank"
-     style="color:#00c3ff;text-decoration:none;">
-     @AoirocatYoutube
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png" width="16">
+  <a href="https://twitter.com/AoirocatYoutube" target="_blank" style="color:#00c3ff;text-decoration:none;">
+    @AoirocatYoutube
   </a>
 </div>
 
@@ -159,7 +170,13 @@ button {
 <script>
 const maps = [
 "でらクランクストリート","けっこいスターパーク","東西たかさん広場",
-"グレートウォール","立体交差のある風景","光と闇のライブステージ"
+"グレートウォール","立体交差のある風景","光と闇のライブステージ",
+"妖華帝都ケルパーズの散歩道","ちゅら島リゾート","って～！つっぺる工事現場",
+"太鼓で祭りだドーン！","おいでやす鳥居通り","【ストヘス区】 急襲戦闘区域",
+"かけだせ！じっぱか城","どっひゃぁ〜！なっから遺跡",
+"Castle of the Silver Feet","マジきてる #夜光犯罪特区",
+"Hello :-) irregular World","なまらモーモーパーク",
+"おっかねぇ！氷焔神域ケイオスブルク","バリバリ！てげてげモーターウェイ"
 ];
 
 function generateMatchSelectors(){
@@ -190,19 +207,29 @@ function generateMatchSelectors(){
 
 function generateRule(){
   const time=document.getElementById('time').value;
+  const heroes=document.getElementById('heroes').value;
+  const rules=document.getElementById('rules').value;
+  const players=document.getElementById('players').value;
+  const teamA=document.getElementById('teamA').value;
+  const teamB=document.getElementById('teamB').value;
+
   const cards=[...document.querySelectorAll('.cardBtn.active')]
     .map(b=>b.innerText).join(', ');
 
   const count=document.getElementById('matchCount').value;
   const labels=["一戦目","二戦目","三戦目","四戦目","五戦目"];
 
-  let text=`試合時間: ${time}秒\n\n`;
+  let text=`試合時間: ${time}秒\n`;
+  text+=`参加人数: ${players}\n`;
+  text+=`チームA: ${teamA||"未設定"}\n`;
+  text+=`チームB: ${teamB||"未設定"}\n\n`;
+  text+=`使用禁止ヒーロー: ${heroes||"なし"}\n`;
+  text+=`カード制限: ${cards||"なし"}\n`;
+  text+=`追加ルール: ${rules||"なし"}\n\n`;
 
   for(let i=1;i<=count;i++){
     text+=`${labels[i-1]}: ${document.getElementById("map_"+i).value}\n`;
   }
-
-  text+=`\nカード制限: ${cards || "なし"}`;
 
   document.getElementById('output').innerText=text;
 }
