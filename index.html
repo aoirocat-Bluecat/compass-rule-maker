@@ -76,13 +76,19 @@ button {
   border-radius:4px;
 }
 
+/* 🔥 ロゴ大きく＆見やすく */
 .credit {
-  margin-top:10px;
+  margin-top:12px;
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:6px;
-  font-size:12px;
+  gap:8px;
+  font-size:13px;
+}
+
+.credit img {
+  width:40px;
+  height:auto;
 }
 </style>
 </head>
@@ -148,14 +154,12 @@ button {
 
 </div>
 
-<!-- 🔥 画像化対象 -->
 <div class="card" id="resultCard">
 <h3>生成結果</h3>
 <div id="output" class="output"></div>
 
-<!-- 🔥 ロゴ変更済み -->
 <div class="credit">
-  <img src="logo.png" width="20">
+  <img src="logo.png">
   <a href="https://twitter.com/Compassrulemake" target="_blank" style="color:#00c3ff;text-decoration:none;">
     @Compassrulemake
   </a>
