@@ -6,76 +6,21 @@
 <title>#コンパス カスタムルール作成</title>
 
 <style>
-body { font-family: Arial; background:#111; color:#fff; padding:20px; }
+body { font-family: Arial, sans-serif; background:#111; color:#fff; margin:0; padding:20px; }
 h1 { text-align:center; }
-
 .container { max-width:900px; margin:auto; }
+.card { background:#1e1e1e; padding:15px; border-radius:10px; margin-bottom:15px; }
+input, select { width:100%; padding:8px; margin:6px 0 10px; border-radius:6px; border:none; }
+button { padding:10px 14px; border:none; border-radius:6px; background:#00c3ff; color:#fff; cursor:pointer; margin-right:8px; }
+.output { white-space:pre-wrap; background:#fff; color:#000; padding:12px; border-radius:10px; font-weight:bold; }
+.grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.cardBtn { background:#2a3a4a; color:#fff; border:2px solid transparent; padding:10px; border-radius:8px; font-weight:bold; }
+.cardBtn.active { background:#ff4655; border:2px solid #fff; position:relative; }
+.cardBtn.active::after { content:"禁止"; position:absolute; top:4px; right:6px; font-size:10px; background:#000; padding:2px 4px; border-radius:4px; }
 
-.card {
-  background:#1e1e1e;
-  padding:15px;
-  border-radius:12px;
-  margin-bottom:15px;
-}
-
-input, select {
-  width:100%;
-  padding:8px;
-  margin:6px 0 10px;
-  border-radius:6px;
-  border:none;
-}
-
-button {
-  padding:10px;
-  border:none;
-  border-radius:6px;
-  background:#00c3ff;
-  color:#fff;
-  cursor:pointer;
-  margin-right:8px;
-}
-
-.output {
-  white-space:pre-wrap;
-  background:#fff;
-  color:#000;
-  padding:15px;
-  border-radius:10px;
-  font-weight:bold;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-
-.cardBtn {
-  background:#2a3a4a;
-  color:#fff;
-  padding:10px;
-  border-radius:8px;
-}
-
-.cardBtn.active {
-  background:#ff4655;
-  position:relative;
-}
-
-.cardBtn.active::after {
-  content:"禁止";
-  position:absolute;
-  top:4px;
-  right:6px;
-  font-size:10px;
-  background:#000;
-  padding:2px 4px;
-  border-radius:4px;
-}
-
+/* 🔥 クレジット */
 .credit {
-  margin-top:12px;
+  margin-top:10px;
   display:flex;
   justify-content:flex-end;
   align-items:center;
@@ -87,43 +32,37 @@ button {
 
 <body>
 <div class="container">
-
 <h1>#コンパス カスタムルール作成ツール</h1>
 
 <div class="card">
 
-<label>試合時間</label>
-<select id="time">
-<option value="60">60秒</option>
-<option value="90">90秒</option>
-<option value="180" selected>180秒（通常）</option>
-<option value="240">240秒</option>
-<option value="300">300秒</option>
-<option value="480">480秒</option>
-<option value="999">999秒</option>
-</select>
+<label>ゲームモード</label>
+<select id="mode"><option selected>カスタムマッチ</option></select>
+
+<label>試合時間（分）</label>
+<input type="number" id="time" value="3">
+
+<label>使用禁止ヒーロー（カンマ区切り）</label>
+<input type="text" id="heroes">
 
 <label>カード制限</label>
 <div class="grid">
-<button class="cardBtn">近距離</button>
-<button class="cardBtn">遠距離</button>
-<button class="cardBtn">連続</button>
-<button class="cardBtn">周囲</button>
-<button class="cardBtn">回復</button>
-<button class="cardBtn">ガード</button>
-<button class="cardBtn">強化</button>
-<button class="cardBtn">弱体化</button>
-<button class="cardBtn">移動</button>
-<button class="cardBtn">設置</button>
-<button class="cardBtn">カウンター</button>
-<button class="cardBtn">その他</button>
+<button type="button" class="cardBtn">近距離</button>
+<button type="button" class="cardBtn">遠距離</button>
+<button type="button" class="cardBtn">連続</button>
+<button type="button" class="cardBtn">周囲</button>
+<button type="button" class="cardBtn">回復</button>
+<button type="button" class="cardBtn">ガード</button>
+<button type="button" class="cardBtn">強化</button>
+<button type="button" class="cardBtn">弱体化</button>
+<button type="button" class="cardBtn">移動</button>
+<button type="button" class="cardBtn">設置</button>
+<button type="button" class="cardBtn">カウンター</button>
+<button type="button" class="cardBtn">その他</button>
 </div>
 
-<label>使用禁止ヒーロー</label>
-<input type="text" id="heroes" placeholder="例: ジャンヌ, リリカ">
-
 <label>追加ルール</label>
-<input type="text" id="rules" placeholder="例: ダッシュ禁止">
+<input type="text" id="rules">
 
 <label>参加人数</label>
 <input type="number" id="players" value="6">
@@ -149,18 +88,18 @@ button {
 
 </div>
 
+<!-- 🔥 ここ全部が画像になる -->
 <div class="card" id="resultCard">
-
 <h3>生成結果</h3>
 <div id="output" class="output"></div>
 
+<!-- 🔥 Xロゴ（確実に画像に入る） -->
 <div class="credit">
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png" width="16">
   <a href="https://twitter.com/AoirocatYoutube" target="_blank" style="color:#00c3ff;text-decoration:none;">
     @AoirocatYoutube
   </a>
 </div>
-
 </div>
 
 </div>
@@ -179,24 +118,24 @@ const maps = [
 "おっかねぇ！氷焔神域ケイオスブルク","バリバリ！てげてげモーターウェイ"
 ];
 
-function generateMatchSelectors(){
-  const container=document.getElementById('matchMaps');
-  const count=document.getElementById('matchCount').value;
-  const labels=["一戦目","二戦目","三戦目","四戦目","五戦目"];
+function generateMatchSelectors() {
+  const container = document.getElementById('matchMaps');
+  const count = parseInt(document.getElementById('matchCount').value);
+  const labels = ["一戦目","二戦目","三戦目","四戦目","五戦目"];
 
-  container.innerHTML="";
+  container.innerHTML = "";
 
-  for(let i=1;i<=count;i++){
-    const label=document.createElement('label');
-    label.textContent=labels[i-1];
+  for (let i = 1; i <= count; i++) {
+    const label = document.createElement('label');
+    label.textContent = labels[i-1];
 
-    const select=document.createElement('select');
-    select.id="map_"+i;
+    const select = document.createElement('select');
+    select.id = `map_${i}`;
 
-    maps.forEach(m=>{
-      const opt=document.createElement('option');
-      opt.value=m;
-      opt.textContent=m;
+    maps.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m;
       select.appendChild(opt);
     });
 
@@ -205,58 +144,51 @@ function generateMatchSelectors(){
   }
 }
 
-function generateRule(){
-  const time=document.getElementById('time').value;
-  const heroes=document.getElementById('heroes').value;
-  const rules=document.getElementById('rules').value;
-  const players=document.getElementById('players').value;
-  const teamA=document.getElementById('teamA').value;
-  const teamB=document.getElementById('teamB').value;
+function generateRule() {
+  const mode = document.getElementById('mode').value;
+  const time = document.getElementById('time').value;
+  const heroes = document.getElementById('heroes').value;
+  const cards = Array.from(document.querySelectorAll('.cardBtn.active')).map(b=>b.innerText).join(', ');
+  const rules = document.getElementById('rules').value;
+  const players = document.getElementById('players').value;
+  const teamA = document.getElementById('teamA').value;
+  const teamB = document.getElementById('teamB').value;
 
-  const cards=[...document.querySelectorAll('.cardBtn.active')]
-    .map(b=>b.innerText).join(', ');
+  const count = parseInt(document.getElementById('matchCount').value);
+  const labels = ["一戦目","二戦目","三戦目","四戦目","五戦目"];
 
-  const count=document.getElementById('matchCount').value;
-  const labels=["一戦目","二戦目","三戦目","四戦目","五戦目"];
-
-  let text=`試合時間: ${time}秒\n`;
-  text+=`参加人数: ${players}\n`;
-  text+=`チームA: ${teamA||"未設定"}\n`;
-  text+=`チームB: ${teamB||"未設定"}\n\n`;
-  text+=`使用禁止ヒーロー: ${heroes||"なし"}\n`;
-  text+=`カード制限: ${cards||"なし"}\n`;
-  text+=`追加ルール: ${rules||"なし"}\n\n`;
-
-  for(let i=1;i<=count;i++){
-    text+=`${labels[i-1]}: ${document.getElementById("map_"+i).value}\n`;
+  let matchText = "";
+  for (let i = 1; i <= count; i++) {
+    const map = document.getElementById(`map_${i}`).value;
+    matchText += `${labels[i-1]}: ${map}\n`;
   }
 
-  document.getElementById('output').innerText=text;
+  const text = `【#コンパス カスタムルール】\n\nモード: ${mode}\n試合時間: ${time}分\n参加人数: ${players}\n\nチームA: ${teamA || "未設定"}\nチームB: ${teamB || "未設定"}\n\n使用禁止ヒーロー: ${heroes || "なし"}\nカード制限: ${cards || "なし"}\n追加ルール: ${rules || "なし"}\n\nステージ:\n${matchText}`;
+
+  document.getElementById('output').innerText = text;
 }
 
-function saveImage(){
-  html2canvas(document.getElementById('resultCard'),{
-    backgroundColor:"#ffffff",
+function saveImage() {
+  html2canvas(document.getElementById('resultCard'), {
+    backgroundColor:'#ffffff',
     scale:2,
     useCORS:true
-  }).then(canvas=>{
-    const link=document.createElement('a');
-    link.download='rule.png';
-    link.href=canvas.toDataURL("image/png");
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'rule.png';
+    link.href = canvas.toDataURL('image/png');
     link.click();
   });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
   generateMatchSelectors();
-  document.getElementById('matchCount')
-    .addEventListener('change',generateMatchSelectors);
+  document.getElementById('matchCount').addEventListener('change', generateMatchSelectors);
 
-  document.querySelectorAll('.cardBtn').forEach(btn=>{
-    btn.addEventListener('click',()=>btn.classList.toggle('active'));
+  document.querySelectorAll('.cardBtn').forEach(btn => {
+    btn.addEventListener('click', () => btn.classList.toggle('active'));
   });
 });
 </script>
-
 </body>
 </html>
